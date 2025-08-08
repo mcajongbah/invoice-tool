@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Free Invoice Maker",
-  description: "Create, preview, and download professional invoices for free.",
+  title: "Invoice | WeWire",
+  description:
+    "Create, preview, and download professional invoices for your business.",
 };
 
 export default function RootLayout({
@@ -24,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased print:bg-white`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased print:bg-white`}
+      >
         {children}
       </body>
     </html>

@@ -36,6 +36,24 @@ export function InvoiceForm() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
+  const handlePrint = () => {
+    const previousTitle = document.title;
+    const business = draft.business.name?.trim() || "Invoice";
+    const id = draft.id?.trim() || "Draft";
+    const safe = `${business}_${id}`
+      .replace(/\s+/g, " ")
+      .replace(/[^a-zA-Z0-9._ -]/g, "")
+      .slice(0, 120);
+    const desiredTitle = safe || "Invoice";
+    const restore: EventListener = () => {
+      document.title = previousTitle;
+      window.removeEventListener("afterprint", restore);
+    };
+    document.title = desiredTitle;
+    window.addEventListener("afterprint", restore);
+    window.print();
+  };
+
   const onLogoChange = async (file: File | null) => {
     if (!file) return;
     const reader = new FileReader();
@@ -59,7 +77,7 @@ export function InvoiceForm() {
           <Button variant="outline" onClick={resetDraft} title="Reset">
             <RotateCcw className="h-4 w-4 mr-2" /> Reset
           </Button>
-          <Button onClick={() => window.print()} title="Download / Print">
+          <Button onClick={handlePrint} title="Download / Print">
             <Download className="h-4 w-4 mr-2" /> PDF
           </Button>
           <a

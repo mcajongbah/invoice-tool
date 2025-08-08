@@ -130,9 +130,17 @@
   body {
     background: white !important;
   }
+  aside,
+  nav,
+  header,
+  footer {
+    display: none !important;
+  }
   #invoice {
     box-shadow: none !important;
     border: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
