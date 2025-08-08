@@ -41,7 +41,7 @@ export default function OGImage() {
           >
             FI
           </div>
-          <div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 54, fontWeight: 800, letterSpacing: -0.5 }}>
               Free Invoice Maker
             </div>

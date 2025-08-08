@@ -37,6 +37,7 @@ export const metadata: Metadata = {
       "Create, preview, and download professional invoices for your business.",
     images: ["/opengraph-image"],
   },
+  metadataBase: new URL("https://wewire-invoice.vercel.app"),
 };
 
 export default function RootLayout({
