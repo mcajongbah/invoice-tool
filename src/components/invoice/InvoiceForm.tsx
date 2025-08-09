@@ -16,6 +16,7 @@ import {
   Save,
   Trash2,
 } from "lucide-react";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 const currencyOptions: { label: string; value: CurrencyCode }[] = [
@@ -69,7 +70,15 @@ export function InvoiceForm() {
   return (
     <div className="h-full flex flex-col">
       <div className="sticky top-0 z-10 bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60 border-b px-4 md:px-6 py-3 flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Create Invoice</h2>
+        <div className="flex items-center gap-2">
+          <Image
+            src="/logo.svg"
+            alt="WeWire"
+            className="h-5 w-auto"
+            width={20}
+            height={20}
+          />
+        </div>
         <div className="flex items-center gap-2">
           <Button variant="secondary" onClick={saveDraft} title="Save draft">
             <Save className="h-4 w-4 mr-2" /> Save

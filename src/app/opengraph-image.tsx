@@ -25,44 +25,39 @@ export default function OGImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 84,
-              height: 84,
-              borderRadius: 16,
-              background: "#0f172a",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-              fontSize: 44,
-              fontWeight: 700,
-            }}
-          >
-            FI
-          </div>
+          {/* Brand mark */}
+          <img
+            src="https://wewire.com/main/logo_dark.svg"
+            width={180}
+            height={32}
+            alt="WeWire"
+            style={{ display: "block" }}
+          />
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 54, fontWeight: 800, letterSpacing: -0.5 }}>
-              Free Invoice Maker
+            <div style={{ fontSize: 36, fontWeight: 800, letterSpacing: -0.5 }}>
+              WeWire Invoice
             </div>
             <div
               style={{
-                fontSize: 26,
+                fontSize: 18,
                 marginTop: 8,
                 color: "#475569",
                 maxWidth: 900,
               }}
             >
-              Create, preview, and download professional invoices — 100% free.
+              Create, preview, and download professional invoices — fast, free,
+              and beautifully formatted.
             </div>
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 28 }}>
+        <div style={{ display: "flex", gap: 28, marginTop: 12 }}>
           {[
             { label: "No account required", icon: "✔" },
             { label: "Real-time preview", icon: "✔" },
             { label: "PDF export", icon: "✔" },
+            { label: "Customer & items", icon: "✔" },
+            { label: "Local drafts", icon: "✔" },
           ].map((f) => (
             <div
               key={f.label}
@@ -108,7 +103,7 @@ export default function OGImage() {
               borderRadius: 4,
             }}
           />
-          <div style={{ fontSize: 18, color: "#64748b" }}>free-invoice</div>
+          <div style={{ fontSize: 18, color: "#64748b" }}>wewire.com</div>
         </div>
       </div>
     ),
