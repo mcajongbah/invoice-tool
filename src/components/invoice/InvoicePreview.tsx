@@ -65,7 +65,10 @@ export function InvoicePreview() {
         className="bg-white shadow print:shadow-none max-w-3xl mx-auto border rounded-md overflow-hidden print:border-0 origin-top"
         style={{ transform: `scale(${zoom})`, transformOrigin: "top center" }}
       >
-        <div className="p-6 border-b flex items-start justify-between gap-4">
+        <div
+          className="p-6 border-b flex items-start justify-between gap-4"
+          style={{ borderColor: draft.themeColor }}
+        >
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 border rounded-md bg-muted/30 flex items-center justify-center overflow-hidden">
               {draft.business.logoDataUrl ? (
@@ -94,7 +97,12 @@ export function InvoicePreview() {
             </div>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold">Invoice</div>
+            <div
+              className="text-2xl font-bold"
+              style={{ color: draft.themeColor }}
+            >
+              Invoice
+            </div>
             <div className="text-sm text-muted-foreground">#{draft.id}</div>
             <div className="mt-2 text-xs">
               <div>Issue: {formatDate(draft.issueDate)}</div>
@@ -132,13 +140,46 @@ export function InvoicePreview() {
         <div className="px-6">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-y bg-muted/30">
-                <th className="text-left p-2 font-medium">Description</th>
-                <th className="text-right p-2 font-medium">Qty</th>
-                <th className="text-right p-2 font-medium">Rate</th>
-                <th className="text-right p-2 font-medium">Tax %</th>
-                <th className="text-right p-2 font-medium">Discount</th>
-                <th className="text-right p-2 font-medium">Line total</th>
+              <tr
+                className="border-y bg-muted/30"
+                style={{ borderColor: draft.themeColor }}
+              >
+                <th
+                  className="text-left p-2 font-medium"
+                  style={{ color: draft.themeColor }}
+                >
+                  Description
+                </th>
+                <th
+                  className="text-right p-2 font-medium"
+                  style={{ color: draft.themeColor }}
+                >
+                  Qty
+                </th>
+                <th
+                  className="text-right p-2 font-medium"
+                  style={{ color: draft.themeColor }}
+                >
+                  Rate
+                </th>
+                <th
+                  className="text-right p-2 font-medium"
+                  style={{ color: draft.themeColor }}
+                >
+                  Tax %
+                </th>
+                <th
+                  className="text-right p-2 font-medium"
+                  style={{ color: draft.themeColor }}
+                >
+                  Discount
+                </th>
+                <th
+                  className="text-right p-2 font-medium"
+                  style={{ color: draft.themeColor }}
+                >
+                  Line total
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -197,9 +238,14 @@ export function InvoicePreview() {
                 <span>Tax</span>
                 <span>{formatCurrency(draft.currency, totals.taxTotal)}</span>
               </div>
-              <div className="border-t pt-2 flex justify-between font-semibold text-base">
-                <span>Total due</span>
-                <span>{formatCurrency(draft.currency, totals.grandTotal)}</span>
+              <div
+                className="border-t pt-2 flex justify-between font-semibold text-base"
+                style={{ borderColor: draft.themeColor }}
+              >
+                <span style={{ color: draft.themeColor }}>Total due</span>
+                <span style={{ color: draft.themeColor }}>
+                  {formatCurrency(draft.currency, totals.grandTotal)}
+                </span>
               </div>
             </div>
           </div>

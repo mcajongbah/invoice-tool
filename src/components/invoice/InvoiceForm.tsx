@@ -31,6 +31,25 @@ const currencyOptions: { label: string; value: CurrencyCode }[] = [
   { label: "ZAR R", value: "ZAR" },
 ];
 
+const themeColors: { label: string; value: string }[] = [
+  { label: "Slate", value: "#334155" },
+  { label: "Gray", value: "#4b5563" },
+  { label: "Red", value: "#ef4444" },
+  { label: "Orange", value: "#f97316" },
+  { label: "Amber", value: "#f59e0b" },
+  { label: "Green", value: "#22c55e" },
+  { label: "Emerald", value: "#10b981" },
+  { label: "Teal", value: "#14b8a6" },
+  { label: "Sky", value: "#0ea5e9" },
+  { label: "Blue", value: "#2563eb" },
+  { label: "Indigo", value: "#4f46e5" },
+  { label: "Violet", value: "#7c3aed" },
+  { label: "Purple", value: "#9333ea" },
+  { label: "Fuchsia", value: "#c026d3" },
+  { label: "Pink", value: "#ec4899" },
+  { label: "Rose", value: "#f43f5e" },
+];
+
 export function InvoiceForm() {
   const { draft, totals, dispatch, preferences, saveDraft, resetDraft } =
     useInvoice();
@@ -514,6 +533,35 @@ export function InvoiceForm() {
                   })
                 }
               />
+            </div>
+            <div>
+              <label className="text-xs text-muted-foreground mb-1">
+                Theme color
+              </label>
+              <div className="flex items-center gap-2 flex-wrap w-full">
+                {themeColors.map((c) => (
+                  <button
+                    key={c.value}
+                    type="button"
+                    aria-label={`Select ${c.label} theme`}
+                    title={c.label}
+                    className="h-6 w-6 rounded-full border"
+                    style={{
+                      backgroundColor: c.value,
+                      outline:
+                        draft.themeColor === c.value
+                          ? `2px solid ${c.value}`
+                          : undefined,
+                    }}
+                    onClick={() =>
+                      dispatch({
+                        type: "SET_INVOICE",
+                        payload: { themeColor: c.value },
+                      })
+                    }
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>

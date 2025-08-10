@@ -64,6 +64,7 @@ export interface Invoice {
   issueDate: string; // ISO date
   dueDate: string; // ISO date
   currency: CurrencyCode;
+  themeColor: string;
   business: BusinessInfo;
   customer: CustomerInfo;
   items: LineItem[];
@@ -89,5 +90,3 @@ export type InvoiceState = {
   preferences: Preferences;
   isLoading: boolean;
 };
-
-

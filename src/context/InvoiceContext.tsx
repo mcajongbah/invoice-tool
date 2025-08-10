@@ -41,6 +41,7 @@ function defaultInvoice(): Invoice {
     issueDate: created,
     dueDate: addDaysISO(created, 30),
     currency: "USD",
+    themeColor: "#2563eb",
     business: {
       name: "",
       logoDataUrl: null,
@@ -292,7 +293,9 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
     }>(localStorage.getItem(LOCAL_STORAGE_PREF_KEY));
 
     const initial: InvoiceState = {
-      draft: storedDraft ?? defaultInvoice(),
+      draft: storedDraft
+        ? { ...defaultInvoice(), ...storedDraft }
+        : defaultInvoice(),
       totals: { subtotal: 0, discountTotal: 0, taxTotal: 0, grandTotal: 0 },
       preferences: {
         savedCustomers: storedPrefs?.savedCustomers ?? [],
