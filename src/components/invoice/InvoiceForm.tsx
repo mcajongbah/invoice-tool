@@ -1,8 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ColorPicker } from "@/components/ui/color-picker";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useInvoice } from "@/context/InvoiceContext";
@@ -11,6 +17,7 @@ import {
   Download,
   GripVertical,
   Mail,
+  Palette,
   Plus,
   RotateCcw,
   Save,
@@ -545,7 +552,7 @@ export function InvoiceForm() {
                     type="button"
                     aria-label={`Select ${c.label} theme`}
                     title={c.label}
-                    className="h-6 w-6 rounded-full border"
+                    className="h-[26px] w-[26px] rounded-full border"
                     style={{
                       backgroundColor: c.value,
                       outline:
@@ -561,6 +568,35 @@ export function InvoiceForm() {
                     }
                   />
                 ))}
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      title="Custom"
+                      aria-label="Open custom color picker"
+                      className="w-full"
+                    >
+                      <Palette className="h-4 w-4 mr-2" /> Custom
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-72 p-2">
+                    <div className="space-y-2">
+                      <ColorPicker
+                        color={draft.themeColor}
+                        onChange={(hex) =>
+                          dispatch({
+                            type: "SET_INVOICE",
+                            payload: { themeColor: hex },
+                          })
+                        }
+                      />
+                      <div className="text-xs text-muted-foreground">
+                        {draft.themeColor}
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
           </div>
