@@ -62,6 +62,38 @@ export function InvoiceForm() {
     useInvoice();
   const fileRef = useRef<HTMLInputElement>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [numberInputBuffers, setNumberInputBuffers] = useState<
+    Record<
+      string,
+      Partial<{
+        unitPrice: string;
+        taxRatePercent: string;
+        discountValue: string;
+      }>
+    >
+  >({});
+
+  const setBuffer = (
+    itemId: string,
+    field: "unitPrice" | "taxRatePercent" | "discountValue",
+    value: string
+  ) => {
+    setNumberInputBuffers((prev) => ({
+      ...prev,
+      [itemId]: { ...prev[itemId], [field]: value },
+    }));
+  };
+
+  const getBufferedValue = (
+    itemId: string,
+    fallbackNumber: number,
+    field: "unitPrice" | "taxRatePercent" | "discountValue"
+  ) => {
+    const buffered = numberInputBuffers[itemId]?.[field];
+    if (buffered !== undefined) return buffered;
+    // Show empty string initially when stored value is 0
+    return fallbackNumber === 0 ? "" : String(fallbackNumber);
+  };
 
   const handlePrint = () => {
     const previousTitle = document.title;
@@ -689,19 +721,25 @@ export function InvoiceForm() {
                     placeholder="0.00"
                     type="number"
                     min={0}
-                    value={item.unitPrice}
+                    value={getBufferedValue(
+                      item.id,
+                      item.unitPrice,
+                      "unitPrice"
+                    )}
                     rightSlot={
                       <span className="text-xs">{draft.currency}</span>
                     }
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      setBuffer(item.id, "unitPrice", raw);
                       dispatch({
                         type: "UPDATE_ITEM",
                         payload: {
                           id: item.id,
-                          updates: { unitPrice: Number(e.target.value) },
+                          updates: { unitPrice: Number(raw || 0) },
                         },
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
                 <div className="col-span-4">
@@ -711,17 +749,23 @@ export function InvoiceForm() {
                     placeholder="0"
                     type="number"
                     min={0}
-                    value={item.taxRatePercent}
+                    value={getBufferedValue(
+                      item.id,
+                      item.taxRatePercent,
+                      "taxRatePercent"
+                    )}
                     rightSlot={<span className="text-xs">%</span>}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      setBuffer(item.id, "taxRatePercent", raw);
                       dispatch({
                         type: "UPDATE_ITEM",
                         payload: {
                           id: item.id,
-                          updates: { taxRatePercent: Number(e.target.value) },
+                          updates: { taxRatePercent: Number(raw || 0) },
                         },
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
                 <div className="col-span-4">
@@ -757,21 +801,27 @@ export function InvoiceForm() {
                     placeholder={item.discountType === "percent" ? "0" : "0.00"}
                     type="number"
                     min={0}
-                    value={item.discountValue}
+                    value={getBufferedValue(
+                      item.id,
+                      item.discountValue,
+                      "discountValue"
+                    )}
                     rightSlot={
                       <span className="text-xs">
                         {item.discountType === "percent" ? "%" : draft.currency}
                       </span>
                     }
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      setBuffer(item.id, "discountValue", raw);
                       dispatch({
                         type: "UPDATE_ITEM",
                         payload: {
                           id: item.id,
-                          updates: { discountValue: Number(e.target.value) },
+                          updates: { discountValue: Number(raw || 0) },
                         },
-                      })
-                    }
+                      });
+                    }}
                   />
                 </div>
               </div>
