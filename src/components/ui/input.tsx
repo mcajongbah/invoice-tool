@@ -7,7 +7,10 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, leftSlot, rightSlot, ...props }, ref) => {
+  (
+    { className, type, leftSlot, rightSlot, value, defaultValue, ...props },
+    ref
+  ) => {
     return (
       <div className={cn("relative", leftSlot || rightSlot ? "" : "")}>
         {leftSlot ? (
@@ -23,6 +26,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             rightSlot ? "pr-9" : "",
             className
           )}
+          value={value === null ? undefined : value}
+          defaultValue={defaultValue === null ? undefined : defaultValue}
           ref={ref}
           {...props}
         />
